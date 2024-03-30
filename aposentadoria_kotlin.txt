@@ -1,0 +1,56 @@
+package com.example.tempo_andson
+
+import android.os.Bundle
+import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Spinner
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_main)
+        // chamar o layout
+        setContentView(R.layout.activity_main)
+        // componentes da tela
+
+        val spsexo = findViewById<Spinner>(R.id.sp_sexo)
+        //idade
+        val idade = findViewById<EditText>(R.id.Ed_Text_Idade)
+        // botao
+        val botao = findViewById<Button>(R.id.btn_calcula)
+        // resultado
+        val resultado = findViewById<TextView>(R.id.txt_Resultado)
+
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_dropdown_item,
+            listOf("Masculino", "Feminino")
+        )
+        spsexo.adapter = ArrayAdapter<String>(
+            this, android.R.layout.simple_spinner_dropdown_item,
+            listOf("Masculino", "Feminino")
+        )
+
+        spsexo.adapter = adapter
+
+        botao.setOnClickListener {
+            val spS = spsexo.selectedItem as String
+            val ida = idade.text.toString().toInt()
+            var result = 0
+
+            if (spS == "Masculino") {
+                result = 65 - ida
+            } else {
+                result = 62 - ida
+            }
+            resultado.text = "Falta pouco para você se aposentar $result Anos"
+
+
+        }
+    }
+}
